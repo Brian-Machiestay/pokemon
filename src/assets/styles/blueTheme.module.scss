@@ -1,0 +1,16 @@
+@use './colors';
+
+.default_theme {
+    
+    span {
+        color: colors.$blue-theme;
+    }
+
+    .background {
+        background-color: colors.$blue-theme;
+    }
+
+    .border {
+        border: 4px solid colors.$blue-theme;
+    }
+}

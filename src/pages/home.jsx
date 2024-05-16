@@ -2,14 +2,13 @@ import React from "react";
 import styles from '../assets/styles/pages/home.module.scss';
 import home_img from '../assets/images/home-image.jpg';
 import search_icon from '../assets/images/search_icon.png';
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 
 
 const Home = () => {
 
     const theme = useSelector((state) => state.pokemon.theme);
     console.log(theme)
-
 
     return (
         <div className={`${styles.container} ${theme.default_theme}`}>
