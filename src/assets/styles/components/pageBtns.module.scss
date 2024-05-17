@@ -1,0 +1,18 @@
+.container {
+    margin-left: 5%;
+    display: flex;
+    gap: 10px;
+
+    p {
+        font-size: 14pt;
+    }
+
+    button {
+        font-weight: 500;
+        font-size: 14pt;
+        outline: none;
+        border: none;
+        border-radius: 5px;
+        background-color: rgb(201, 200, 200);
+    }
+}

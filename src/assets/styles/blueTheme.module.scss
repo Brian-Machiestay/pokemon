@@ -13,4 +13,9 @@
     .border {
         border: 4px solid colors.$blue-theme;
     }
+
+    .active {
+        background-color: colors.$blue-theme;
+        color: white;
+    }
 }
