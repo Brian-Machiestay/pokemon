@@ -1,8 +1,9 @@
 import React from "react";
 import styles from '../assets/styles/pages/home.module.scss';
-import home_img from '../assets/images/home-image.jpg';
+import home_img from '../assets/images/home-image.svg';
 import search_icon from '../assets/images/search_icon.png';
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 
 
 const Home = () => {
@@ -16,10 +17,10 @@ const Home = () => {
             <h1>Pok&#232;<span className={theme.color}>book</span></h1>
             <p>Largest Pok&#232;mon index with information about every pokemon you can think of</p>
             <div className={`${styles.search_bar} ${theme.border}`}>
-                <input placeholder="Enter pokemon name" />
+                <input type="text" placeholder="Enter pokemon name" />
                 <img src={search_icon} alt="search" className={theme.background} />
             </div>
-            <a href="/all">View all</a>
+            <Link to="/all">View all</Link>
         </div>
     )
 }

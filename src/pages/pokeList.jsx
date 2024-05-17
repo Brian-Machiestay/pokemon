@@ -1,9 +1,13 @@
 import React from "react";
 
+import Navbar from "../components/navbar";
+
 
 const PokeList = () => {
     return (
-        <p>This is the pokelist page</p>
+        <div>
+            <Navbar />
+        </div>
     )
 }
 
