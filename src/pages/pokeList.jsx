@@ -12,6 +12,12 @@ const PokeList = () => {
             <div className={styles.poke_list}>
                 <Pokecard />
                 <Pokecard />
+                <Pokecard />
+                <Pokecard />
+                <Pokecard />
+                <Pokecard />
+                <Pokecard />
+                <Pokecard />
             </div>
         </div>
     )

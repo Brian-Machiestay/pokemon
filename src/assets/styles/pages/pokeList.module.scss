@@ -2,5 +2,11 @@
 
     .poke_list {
         margin: 40px 5%;
+        display: flex;
+        gap: 5%;
+        justify-content: space-between;
+        flex-wrap: wrap;
     }
+
+    
 }
