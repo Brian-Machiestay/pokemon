@@ -1,5 +1,5 @@
 import React from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 import styles from '../assets/styles/components/pokeSize.module.scss';
 
@@ -7,10 +7,11 @@ import downArrow from '../assets/images/arrowdown.svg';
 
 import { changePageSize } from "../state/slices/pokemonSlice";
 
+
 import $ from 'jquery';
 
 const Pokesize = () => {
-
+    const pageSize = useSelector((state) => state.pokemon.pageSize)
     const dispatch = useDispatch();
 
     function changeOption (e) {
@@ -29,7 +30,7 @@ const Pokesize = () => {
 
     return (
         <div className={styles.container}>
-            <button onClick={displayOption} className={styles.display_option}><span className={styles.optionSelected}>8</span><img src={downArrow} alt="select" /></button>
+            <button onClick={displayOption} className={styles.display_option}><span className={styles.optionSelected}>{pageSize}</span><img src={downArrow} alt="select" /></button>
             <div className={styles.options}>
                 <button onClick={changeOption}>8</button>
                 <button onClick={changeOption}>12</button>

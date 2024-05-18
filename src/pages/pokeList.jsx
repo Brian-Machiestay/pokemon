@@ -36,6 +36,7 @@ const PokeList = () => {
         console.log('use effect should be called')
         getPokeList();
         console.log(`page number is ${pageNumber}`)
+        // eslint-disable-next-line 
     }, [pageNumber, pageSize])
 
     return (
