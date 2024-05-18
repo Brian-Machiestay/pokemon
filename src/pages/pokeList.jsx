@@ -3,6 +3,7 @@ import React from "react";
 import Navbar from "../components/navbar";
 import Pokecard from "../components/pokecard";
 import PageBtns from "../components/pageBtns";
+import Pokesize from "../components/pokeSize";
 
 import styles from '../assets/styles/pages/pokeList.module.scss';
 
@@ -20,8 +21,9 @@ const PokeList = () => {
                 <Pokecard />
                 <Pokecard />
             </div>
-            <div>
+            <div className={styles.page_details}>
                 <PageBtns />
+                <Pokesize />
             </div>
         </div>
     )
