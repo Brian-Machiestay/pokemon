@@ -10,7 +10,7 @@ import { useSelector } from 'react-redux';
 
 const Pokecard = (props) => {
     const theme = useSelector((state) => state.pokemon.theme);
-    console.log(theme)
+    //console.log(theme)
 
     return (
         <div className={`${styles.container} ${theme.default_theme}`}>

@@ -27,6 +27,7 @@ const pokemonSclice = createSlice({
             state.pageSize = Number(action.payload)
         },
         changePageNumber: (state, action) => {
+            console.log('page number was changed')
             state.pageNumber = Number(action.payload)
         }
     }

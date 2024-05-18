@@ -19,7 +19,8 @@ const PokeList = () => {
     const pageSize = useSelector((state) => state.pokemon.pageSize)
     const pageNumber = useSelector((state) => state.pokemon.pageNumber)
     const getPokeList = async () => {
-        const data = await Axios.get(`pokemon/?limit=${pageSize}offset=${pageSize * pageNumber - pageSize}`);
+        setPokeDatatoRender('loading')
+        const data = await Axios.get(`pokemon/?limit=${pageSize}&offset=${pageSize * pageNumber - pageSize}`);
         const dataDetails = data['data']['results'].map((poke) => {
             return axios.get(poke['url'])
         })
@@ -32,8 +33,10 @@ const PokeList = () => {
     }
 
     useEffect(() => {
+        console.log('use effect should be called')
         getPokeList();
-    }, [])
+        console.log(`page number is ${pageNumber}`)
+    }, [pageNumber, pageSize])
 
     return (
         <div className={styles.container}>
