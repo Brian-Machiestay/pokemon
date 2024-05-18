@@ -43,7 +43,7 @@ const PokeList = () => {
             <Navbar />
             <div className={styles.poke_list}>
             {
-                pokeDatatoRender === 'loading'? <p>Loading</p>
+                pokeDatatoRender === 'loading'? <p className={styles.loading}>Loading...</p>
                 :
                 pokeDatatoRender.map((item) => {
                     return <Pokecard data={item} key={item.id}/>
