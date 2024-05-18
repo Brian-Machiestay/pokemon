@@ -1,0 +1,21 @@
+@use './colors';
+
+.default_theme {
+    
+    span {
+        color: colors.$orange-theme;
+    }
+
+    .background {
+        background-color: colors.$orange-theme;
+    }
+
+    .border {
+        border: 4px solid colors.$orange-theme;
+    }
+
+    .active {
+        background-color: colors.$orange-theme;
+        color: white;
+    }
+}
