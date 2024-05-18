@@ -1,15 +1,126 @@
 .modalContainer {
-    left: 35vw;
-    background-color: yellow;
+    left: 32vw;
+    //background-color: yellow;
     //height: 95vh;
 }
 
-.modalBackdrop {
-    left: 0;
-    //background-color: green;
-}
-
 .modalContent {
-    left: 0;
-    //background-color: blue;
+    //height: 30vh;
+    justify-content: center;
+    align-items: center;
+
+    .cover {
+        display: flex;
+        //justify-content: center;
+        //align-items: center;
+        background-color: rgb(236, 232, 232);
+        min-height: 150px;
+        width: 90%;
+        margin: 30px 10px;
+        border-radius: 10px;
+
+        button {
+            width: 30px;
+            height: 30px;
+            margin-top: 10px;
+            margin-left: 10px;
+            justify-self: flex-start;
+            border: none;
+            outline: none;
+            background-color: white;
+            border-radius: 5px;
+            font-weight: bold;
+            box-shadow: 1px 1px 1px grey;
+        }
+
+        img {
+            width: 30%;
+            margin-top: auto;
+            margin-bottom: -30px;
+            margin-left: 25%;
+        }
+    }
+
+    .name {
+        font-weight: bold;
+        font-size: 20pt;
+    }
+
+    .types {
+        display: flex;
+        gap: 10px;
+        margin-top: 20px;
+
+        .poke_type {
+            padding: 3px;
+            font-size: 10pt;
+            background-color: rgb(228, 228, 228);
+            border-radius: 10px;
+        }
+    }
+
+    .details {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin-top: 10px;
+        background-color: rgb(247, 246, 246);
+        //height: 200px;
+        width: 70%;
+
+        .title {
+            width: 100%;
+            margin-top: 10px;
+            background-color: white;
+            font-weight: bold;
+            font-size: 16pt;
+            //justify-content: center;
+            text-align: center;
+            padding: 5px;
+        }
+
+        .metrics {
+            
+            .metric {
+                display: flex;
+                gap: 10px;
+                margin: 5px auto;
+                padding-bottom: 5px;
+                border-bottom: 2px solid rgb(240, 240, 240);
+
+                .metricValue {
+                    font-weight: bold;
+                }
+
+                li.metricValue {
+                    list-style-type: disc;
+                    margin-left: 15px;
+                }
+            }
+        }
+    }
+
+    .tabs {
+        margin-top: 70px;
+        margin-bottom: 20px;
+        padding: 4px;
+        display: flex;
+        justify-content: space-between;
+        background-color: rgb(223, 222, 222);
+        width: 60%;
+        border-radius: 20px;
+
+        button {
+            outline: none;
+            border: none;
+            border-radius: 15px;
+            width: 70px;
+            padding: 5px;
+            background-color: inherit;
+
+            &:focus, &:hover {
+                background-color: white;
+            }
+        }
+    }
 }
