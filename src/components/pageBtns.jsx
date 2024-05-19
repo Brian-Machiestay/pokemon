@@ -12,6 +12,7 @@ import $ from 'jquery';
 
 const PageBtns = () => {
     const [activeBtn, setActiveBtn] = useState('1');
+    const [btnNums, setBtnNums] = useState([2, 3, 4])
     const dispatch = useDispatch();
     const theme = useSelector((state) => state.pokemon.theme);
 
@@ -23,6 +24,18 @@ const PageBtns = () => {
         const num = $(e.target).text();
         dispatch(changePageNumber(num))
         setActiveBtn(num);
+    }
+
+    const shiftLeft = () => {
+        if (btnNums[0] === 2) return
+        const newNums = btnNums.map((num) => num - 1)
+        setBtnNums(newNums)
+    }
+
+    const shiftRight = () => {
+        if (btnNums[btnNums.length - 1] === 11) return
+        const newNums = btnNums.map((num) => num + 1)
+        setBtnNums(newNums)
     }
 
     useEffect(() => {
@@ -37,18 +50,25 @@ const PageBtns = () => {
                 $(item).removeClass(`${theme.active}`)
             }
         }
-    }, [activeBtn, theme])
+    }, [activeBtn, theme, btnNums])
 
     return (
         <div id='pageBtns' className={`${styles.container} ${theme.default_theme}`}>
-            <button>&#x3c;</button>
+            <button onClick={shiftLeft}>&#x3c;</button>
             <button className={theme.active} onClick={changePageNumberState}>1</button>
-            <button onClick={changePageNumberState}>2</button>
-            <button onClick={changePageNumberState}>3</button>
-            <button onClick={changePageNumberState}>4</button>
-            <p>...</p>
+            {
+                btnNums[0] > 2? <p>...</p> : false
+            }
+            {
+                btnNums.map((num, idx) => {
+                    return <button key={idx} onClick={changePageNumberState}>{num}</button>
+                })
+            }
+            {
+                btnNums[btnNums.length - 1] < 11? <p>...</p> : false
+            }  
             <button onClick={changePageNumberState}>12</button>
-            <button>{'>'}</button>
+            <button onClick={shiftRight}>{'>'}</button>
         </div>
     )
 }

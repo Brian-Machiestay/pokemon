@@ -104,9 +104,12 @@ const ViewPokemon = (props) => {
                                 })
                             }
                             </div>
-                            {
-                                details
-                            }
+                            <div className={styles.details}>
+                                <p className={styles.title}>Similar</p>
+                                <div className={`${styles.metrics} ${theme.default_theme}`}>
+
+                                </div>
+                            </div>
                             <div className={styles.tabs}>
                                 <button className={activeTab === 'About'? `${styles.active}`: ''} onClick={changeTab}>About</button>
                                 <button className={activeTab === 'Stats'? `${styles.active}`: ''} onClick={changeTab}>Stats</button>
