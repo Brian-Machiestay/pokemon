@@ -6,21 +6,24 @@ import PageBtns from "../components/pageBtns";
 import Pokesize from "../components/pokeSize";
 
 import Axios from "../utils/axiosConfig";
+import { populatePokeData } from "../state/slices/pokemonSlice";
 
 import { useEffect, useState } from "react";
 
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import axios from "axios";
 
 import styles from '../assets/styles/pages/pokeList.module.scss';
 
 const PokeList = () => {
+    const dispatch = useDispatch()
     const [pokeDatatoRender, setPokeDatatoRender] = useState('loading');
     const pageSize = useSelector((state) => state.pokemon.pageSize)
     const pageNumber = useSelector((state) => state.pokemon.pageNumber)
     const getPokeList = async () => {
         setPokeDatatoRender('loading')
         const data = await Axios.get(`pokemon/?limit=${pageSize}&offset=${pageSize * pageNumber - pageSize}`);
+        console.log(data)
         const dataDetails = data['data']['results'].map((poke) => {
             return axios.get(poke['url'])
         })
@@ -29,6 +32,7 @@ const PokeList = () => {
             return item['data']
         })
         setPokeDatatoRender(pokeData);
+        dispatch(populatePokeData(pokeData))
         console.log(pokeData)
     }
 

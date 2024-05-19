@@ -5,12 +5,13 @@ import styles from '../../assets/styles/defaultTheme.module.scss';
 import blueStyles from '../../assets/styles/blueTheme.module.scss';
 import orangeStyles from '../../assets/styles/orangeTheme.module.scss';
 
-console.log(styles)
+//console.log(styles)
 const initialState = {
     theme: styles,
     color: '#DE527F',
     pageSize: 8,
-    pageNumber: 1
+    pageNumber: 1,
+    pokeData: []
 };
 
 
@@ -39,9 +40,12 @@ const pokemonSclice = createSlice({
         changePageNumber: (state, action) => {
             console.log('page number was changed')
             state.pageNumber = Number(action.payload)
+        },
+        populatePokeData: (state, action) => {
+            state.pokeData = action.payload
         }
     }
 });
   
-  export const { changeTheme, changePageSize, changePageNumber } = pokemonSclice.actions;
+  export const { changeTheme, changePageSize, changePageNumber, populatePokeData } = pokemonSclice.actions;
   export default pokemonSclice.reducer; 

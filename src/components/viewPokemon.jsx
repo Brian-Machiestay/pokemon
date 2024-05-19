@@ -11,9 +11,11 @@ import { useState, useEffect } from "react";
 import RangeInput from "./rangeInput";
 
 import $ from 'jquery'
+import Pokecard from "./pokecard";
 
 const ViewPokemon = (props) => {
 
+    const  pokeData = useSelector((state) => state.pokemon.pokeData)
     const theme = useSelector((state) => state.pokemon.theme)
     const [coverColor, setCoverColor] = useState('loading');
     const [activeTab, setActiveTab] = useState('About')
@@ -31,6 +33,43 @@ const ViewPokemon = (props) => {
             callback(colorThief.getColor(img));
           });
         }
+    }
+
+    const getSimilarPokemon = () => {
+        const types = props.data.types.map((tp) => tp.type.name)
+        const similar = []
+        for (const dt of pokeData) {
+            dt.types.map((tt) => {
+                if (dt.name !== props.data.name && types.indexOf(tt.type.name) !== -1 && similar.length < 2) similar.push(dt);
+                return dt
+            })
+        }
+        console.log(similar)
+        return similar
+    }
+
+    const createGradient = (cc) => {
+        const lighterColor = lightColor(cc, 50);
+        const darkerColor = darkColor(cc, 50);
+        const gradColor = `linear-gradient(to bottom, ${lighterColor} 0%, ${darkerColor} 100%)`;
+        console.log(gradColor)
+        setCoverColor(gradColor)
+    }
+
+    const lightColor = ([r, g, b], percent) => {
+        const degree = Math.round(2.55 * percent);
+        const R = r + degree < 255 ? r + degree : 255;
+        const G = g + degree < 255 ? g + degree : 255;
+        const B = b + degree < 255 ? b + degree : 255;
+        return `rgb(${R}, ${G}, ${B})`;
+    }
+  
+    const darkColor = ([r, g, b], percent) => {
+        const degree = Math.round(2.55 * percent);
+        const R = r - degree > 0 ? r - degree : 0;
+        const G = g - degree > 0 ? g - degree : 0;
+        const B = b - degree > 0 ? b - degree : 0;
+        return `rgb(${R}, ${G}, ${B})`;
     }
 
     const changeTab = (e) => {
@@ -79,9 +118,22 @@ const ViewPokemon = (props) => {
         </div>
     }
 
+    if (activeTab === 'Similar') {
+        details =
+        <div className={styles.details}>
+            <p className={styles.title}>Similar</p>
+            <div className={`${styles.metrics} ${theme.default_theme} ${styles.similarContainer}`}>
+                {
+                getSimilarPokemon().map((poke, ind) => <Pokecard key={ind} similar={poke} />)
+                }
+            </div>
+        </div>
+    }
+
 
     useEffect(() => {
-        getDominantColor(props.data.sprites.front_default, setCoverColor)
+        getDominantColor(props.data.sprites.front_default, createGradient)
+        //getSimilarPokemon()
         // eslint-disable-next-line
     }, [])
 
@@ -92,7 +144,7 @@ const ViewPokemon = (props) => {
                         coverColor === 'loading'? <div className={`modal-content ${styles.modalContent} ${styles.loading}`}><p>Loading</p></div>
                         :
                         <div className={`modal-content ${styles.modalContent}`}>
-                            <div className={styles.cover} style={{ backgroundColor: `rgb(${coverColor?.map((v) => v + 30)})` }}>
+                            <div className={styles.cover} style={{ background: coverColor }}>
                                 <button>&#8592;</button>
                                 <img src={props.data.sprites.front_default} alt="pokemon" />
                             </div>
@@ -104,12 +156,9 @@ const ViewPokemon = (props) => {
                                 })
                             }
                             </div>
-                            <div className={styles.details}>
-                                <p className={styles.title}>Similar</p>
-                                <div className={`${styles.metrics} ${theme.default_theme}`}>
-
-                                </div>
-                            </div>
+                            {
+                                details
+                            }
                             <div className={styles.tabs}>
                                 <button className={activeTab === 'About'? `${styles.active}`: ''} onClick={changeTab}>About</button>
                                 <button className={activeTab === 'Stats'? `${styles.active}`: ''} onClick={changeTab}>Stats</button>

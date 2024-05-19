@@ -20,6 +20,17 @@ const Pokecard = (props) => {
         $(`#viewpokemon-${props.data.id}`).modal('show');
     }
 
+    if (props.similar !== undefined) {
+        return (
+            <div className={`${styles.container} ${theme.default_theme} ${styles.similar}`}>
+                <div className={styles.img_container}>
+                    <img src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${props.similar.id}.png`} alt='pokename'/>
+                </div>
+                <p className={styles.pokemon_name}>{props.similar.name}</p>
+            </div>
+        )
+    }
+
     return (
         <div className={`${styles.container} ${theme.default_theme}`}>
             <div className={styles.img_container}>

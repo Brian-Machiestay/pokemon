@@ -68,7 +68,7 @@
         flex-direction: column;
         //align-items: center;
         margin-top: 10px;
-        background-color: rgb(247, 246, 246);
+        background: linear-gradient(to right, white, rgb(236, 236, 236) 50%, white);;
         //height: 200px;
         width: 80%;
 
@@ -119,6 +119,13 @@
                     text-align: center;
                     font-weight: 500;
                 }
+            }
+
+            &.similarContainer {
+                display: flex;
+                justify-content: space-around;
+                margin-top: 20px;
+                min-height: 150px;
             }
         }
     }
