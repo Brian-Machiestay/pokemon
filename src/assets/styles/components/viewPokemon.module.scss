@@ -62,11 +62,15 @@
     .details {
         display: flex;
         flex-direction: column;
-        align-items: center;
+        //align-items: center;
         margin-top: 10px;
         background-color: rgb(247, 246, 246);
         //height: 200px;
-        width: 70%;
+        width: 80%;
+
+        &.about {
+            align-items: center;
+        }
 
         .title {
             width: 100%;
@@ -83,6 +87,7 @@
             
             .metric {
                 display: flex;
+                align-items: center;
                 gap: 10px;
                 margin: 5px auto;
                 padding-bottom: 5px;
@@ -97,11 +102,24 @@
                     margin-left: 15px;
                 }
             }
+
+            .inputMetric {
+                display: flex;
+                justify-content: space-between;
+                //background-color: green;
+                p {
+                    width: 40%;
+                }
+
+                .inputValue {
+                    text-align: center;
+                }
+            }
         }
     }
 
     .tabs {
-        margin-top: 70px;
+        margin-top: 20px;
         margin-bottom: 20px;
         padding: 4px;
         display: flex;
@@ -118,7 +136,7 @@
             padding: 5px;
             background-color: inherit;
 
-            &:focus, &:hover {
+            &:focus, &:hover, &.active {
                 background-color: white;
             }
         }

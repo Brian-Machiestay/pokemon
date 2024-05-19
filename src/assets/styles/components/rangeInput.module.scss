@@ -1,0 +1,41 @@
+$thumb-size: 5px;
+$thumb-color: fff;
+$range-percent: 50%;
+
+input[type="range"].container {
+    accent-color: var(--color);
+    background-color: grey;
+    height: 1px;
+    width: 30%;
+    //border-radius: 30px;
+    
+    &::-webkit-slider-runnable-track {
+        -webkit-appearance: none;
+        background: linear-gradient(
+            to right,
+            var(--color) 0%,
+            var(--color) var(--range-percent),
+            grey var(--range-percent),
+            grey 100%
+        );
+    }
+
+    &::-webkit-slider-thumb {
+        -webkit-appearance: none;
+        width: $thumb-size;
+        height: $thumb-size;
+        background: $thumb-color;
+        border-radius: 50%;
+        cursor: pointer;
+      }
+    
+      &::-moz-range-thumb {
+        width: $thumb-size;
+        height: $thumb-size;
+        background: $thumb-color;
+        border-radius: 50%;
+        cursor: pointer;
+        border: none;
+      }
+    
+}
