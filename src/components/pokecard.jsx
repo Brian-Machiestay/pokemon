@@ -28,8 +28,8 @@ const Pokecard = (props) => {
             <p className={styles.pokemon_name}>{props.data.name}</p>
             <div className={styles.poke_types}>
                 {
-                    props.data.types.map((tt) => {
-                        return <p className={styles.poke_type}>{tt.type.name}</p>
+                    props.data.types.map((tt, idx) => {
+                        return <p key={idx} className={styles.poke_type}>{tt.type.name}</p>
                     })
                 }
             </div>

@@ -6,7 +6,7 @@ import styles from '../assets/styles/components/viewPokemon.module.scss';
 
 import { useSelector } from "react-redux";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 import RangeInput from "./rangeInput";
 
@@ -15,8 +15,10 @@ import $ from 'jquery'
 const ViewPokemon = (props) => {
 
     const theme = useSelector((state) => state.pokemon.theme)
+    const [coverColor, setCoverColor] = useState('loading');
     const [activeTab, setActiveTab] = useState('About')
 
+    //console.log(coverColor)
     const getDominantColor = (imageUrl, callback) => {
         const img = document.createElement("IMG");
         const colorThief = new ColorThief();
@@ -42,17 +44,18 @@ const ViewPokemon = (props) => {
         <div className={styles.metrics}>
             <div className={styles.metric}>
                 <p>Height</p>
-                <p className={styles.metricValue}>10.3 m</p>
+                <p className={styles.metricValue}>{props.data.height} m</p>
             </div>
             <div className={styles.metric}>
                 <p>Weight</p>
-                <p className={styles.metricValue}>13.0 kg</p>
+                <p className={styles.metricValue}>{props.data.weight}.0 kg</p>
             </div>
             <div className={styles.metric}>
                 <p>Abilities</p>
                 <ul>
-                    <li className={styles.metricValue}>overgrow</li>
-                    <li className={styles.metricValue}>chlorophyll</li>
+                {
+                    props.data.abilities.map((tt, idx) => <li key={idx} className={styles.metricValue}>{tt.ability.name}</li>)
+                }
                 </ul>
             </div>
         </div>
@@ -61,67 +64,56 @@ const ViewPokemon = (props) => {
     if (activeTab === 'Stats') {
         details = 
         <div className={styles.details}>
-                            <p className={styles.title}>Stats</p>
-                            <div className={`${styles.metrics} ${theme.default_theme}`}>
-                                <div className={`${styles.metric} ${styles.inputMetric}`}>
-                                    <p>HP</p>
-                                    <RangeInput initialValue={20} />
-                                    <p className={styles.inputValue}>20</p>
-                                </div>
-                                <div className={`${styles.metric} ${styles.inputMetric}`}>
-                                    <p>Attack</p>
-                                    <RangeInput initialValue={90} />
-                                    <p className={styles.inputValue}>90</p>
-                                </div>
-                                <div className={`${styles.metric} ${styles.inputMetric}`}>
-                                    <p>Defense</p>
-                                    <RangeInput initialValue={70} />
-                                    <p className={styles.inputValue}>70</p>
-                                </div>
-                                <div className={`${styles.metric} ${styles.inputMetric}`}>
-                                    <p>Special Attack</p>
-                                    <RangeInput initialValue={10} />
-                                    <p className={styles.inputValue}>10</p>
-                                </div>
-                                <div className={`${styles.metric} ${styles.inputMetric}`}>
-                                    <p>Special Defense</p>
-                                    <RangeInput initialValue={70} />
-                                    <p className={styles.inputValue}>70</p>
-                                </div>
-                                <div className={`${styles.metric} ${styles.inputMetric}`}>
-                                    <p>Speed</p>
-                                    <RangeInput initialValue={90} />
-                                    <p className={styles.inputValue}>90</p>
-                                </div>
-                            </div>
+            <p className={styles.title}>Stats</p>
+            <div className={`${styles.metrics} ${theme.default_theme}`}>
+                {
+                    props.data.stats.map((st, idx) => {
+                        return <div key={idx} className={`${styles.metric} ${styles.inputMetric}`}>
+                            <p>{st.stat.name}</p>
+                            <RangeInput min={0} max={200} initialValue={st.base_stat} />
+                            <p className={styles.inputValue}>{st.base_stat}</p>
                         </div>
+                    })
+                }
+            </div>
+        </div>
     }
+
+
+    useEffect(() => {
+        getDominantColor(props.data.sprites.front_default, setCoverColor)
+        // eslint-disable-next-line
+    }, [])
 
     return (
         <div className={`modal fade ${styles.modalBackdrop}`} id={`viewpokemon-${props.data.id}`} tabIndex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div className={`modal-dialog modal-dialog-centered ${styles.modalContainer}`} role="document">
-                    <div className={`modal-content ${styles.modalContent}`}>
-                        <div className={styles.cover}>
-                            <button>&#8592;</button>
-                            <img src={props.data.sprites.front_default} alt="pokemon" />
+                    {
+                        coverColor === 'loading'? <div className={`modal-content ${styles.modalContent} ${styles.loading}`}><p>Loading</p></div>
+                        :
+                        <div className={`modal-content ${styles.modalContent}`}>
+                            <div className={styles.cover} style={{ backgroundColor: `rgb(${coverColor?.map((v) => v + 30)})` }}>
+                                <button>&#8592;</button>
+                                <img src={props.data.sprites.front_default} alt="pokemon" />
+                            </div>
+                            <p className={styles.name}>{props.data.name}</p>
+                            <div className={styles.types}>
+                            {
+                                props.data.types.map((tt, idx) => {
+                                    return <p key={idx} className={styles.poke_type}>{tt.type.name}</p>
+                                })
+                            }
+                            </div>
+                            {
+                                details
+                            }
+                            <div className={styles.tabs}>
+                                <button className={activeTab === 'About'? `${styles.active}`: ''} onClick={changeTab}>About</button>
+                                <button className={activeTab === 'Stats'? `${styles.active}`: ''} onClick={changeTab}>Stats</button>
+                                <button className={activeTab === 'Similar'? `${styles.active}`: ''} onClick={changeTab}>Similar</button>
+                            </div> 
                         </div>
-                        <p className={styles.name}>{props.data.name}</p>
-                        <div className={styles.types}>
-                        {
-                            props.data.types.map((tt) => {
-                                return <p className={styles.poke_type}>{tt.type.name}</p>
-                            })
-                        }
-                        </div>
-                        {
-                            details
-                        }
-                        <div className={styles.tabs}>
-                            <button className={activeTab === 'About'? `${styles.active}`: ''} onClick={changeTab}>About</button>
-                            <button className={activeTab === 'Stats'? `${styles.active}`: ''} onClick={changeTab}>Stats</button>
-                            <button className={activeTab === 'Similar'? `${styles.active}`: ''} onClick={changeTab}>Similar</button>
-                        </div> 
-                    </div>
+                    }
                 </div>
         </div>
     )
