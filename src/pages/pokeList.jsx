@@ -22,24 +22,29 @@ const PokeList = () => {
     const pageNumber = useSelector((state) => state.pokemon.pageNumber)
     const getPokeList = async () => {
         setPokeDatatoRender('loading')
-        const data = await Axios.get(`pokemon/?limit=${pageSize}&offset=${pageSize * pageNumber - pageSize}`);
-        console.log(data)
-        const dataDetails = data['data']['results'].map((poke) => {
-            return axios.get(poke['url'])
-        })
-        const pokeDetails = await axios.all(dataDetails)
-        const pokeData = pokeDetails.map((item) => {
-            return item['data']
-        })
-        setPokeDatatoRender(pokeData);
-        dispatch(populatePokeData(pokeData))
-        console.log(pokeData)
+        try {
+            const data = await Axios.get(`pokemon/?limit=${pageSize}&offset=${pageSize * pageNumber - pageSize}`);
+            console.log(data)
+            const dataDetails = data['data']['results'].map((poke) => {
+                return axios.get(poke['url'])
+            })
+            const pokeDetails = await axios.all(dataDetails)
+            const pokeData = pokeDetails.map((item) => {
+                return item['data']
+            })
+            setPokeDatatoRender(pokeData);
+            dispatch(populatePokeData(pokeData))
+            console.log(pokeData)
+        } catch(e) {
+            setPokeDatatoRender('error')
+            return
+        }
     }
 
     useEffect(() => {
-        console.log('use effect should be called')
+        //console.log('use effect should be called')
         getPokeList();
-        console.log(`page number is ${pageNumber}`)
+        //console.log(`page number is ${pageNumber}`)
         // eslint-disable-next-line 
     }, [pageNumber, pageSize])
 
@@ -48,11 +53,20 @@ const PokeList = () => {
             <Navbar />
             <div className={styles.poke_list}>
             {
-                pokeDatatoRender === 'loading'? <p className={styles.loading}>Loading...</p>
+                pokeDatatoRender === 'error'? <p className={styles.loading}>An error occurred</p>: false
+            }
+            {
+                pokeDatatoRender === 'loading' && pokeDatatoRender !== 'error'? <p className={styles.loading}>Loading...</p>
                 :
-                pokeDatatoRender.map((item) => {
+                false
+            }
+
+            {
+                pokeDatatoRender !== 'loading' && pokeDatatoRender !== 'error'? pokeDatatoRender.map((item) => {
                     return <Pokecard data={item} key={item.id}/>
                 })
+                :
+                false
             }
             </div>
             <div className={styles.page_details}>
