@@ -25,6 +25,7 @@
     @media (max-width: screen.$breakpoint) {
         .poke_list {
             margin: 40px 2%;
+            justify-content: center;
         }
     }
 }

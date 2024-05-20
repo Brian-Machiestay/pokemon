@@ -72,6 +72,8 @@
             border-top-left-radius: 5px;
             border-bottom-left-radius: 5px;
             background-color: white;
+            border-top-right-radius: 5px;
+            border-bottom-right-radius: 5px;
         }
 
         img {
@@ -161,11 +163,6 @@
 
         h1 {
             font-size: 12pt;
-        }
-
-        .theme_select {
-            padding-right: 0;
-            padding-left: 0;
         }
     }
 }

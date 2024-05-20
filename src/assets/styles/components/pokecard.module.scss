@@ -1,4 +1,5 @@
 @use '../colors';
+@use '../screen';
 
 .container {
     position: relative;
@@ -96,6 +97,13 @@
             margin-top: 20px;
             color: white;
             //background-color: green;
+        }
+    }
+
+    @media (max-width: screen.$breakpoint) {
+        & {
+            width: 45%;
+            gap: 1%;
         }
     }
 
