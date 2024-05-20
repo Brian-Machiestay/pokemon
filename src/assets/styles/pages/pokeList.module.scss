@@ -1,3 +1,5 @@
+@use '../screen';
+
 .container {
 
     .poke_list {
@@ -18,5 +20,11 @@
         display: flex;
         justify-content: space-between;
         margin-right: 5%;
+    }
+
+    @media (max-width: screen.$breakpoint) {
+        .poke_list {
+            margin: 40px 2%;
+        }
     }
 }

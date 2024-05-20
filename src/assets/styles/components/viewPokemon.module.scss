@@ -1,10 +1,21 @@
+@use '../screen';
+
 .modalContainer {
-    left: 32vw;
+    position: absolute;
+    right: 1%;
+    width: auto;
+    min-width: 40%;
     //background-color: yellow;
     //height: 95vh;
 
     .loading {
         min-height: 90vh;
+    }
+
+    @media (max-width: screen.$breakpoint) {
+        & {
+            left: 0;
+        }
     }
 }
 
@@ -152,5 +163,9 @@
                 background-color: white;
             }
         }
+    }
+
+    @media (max-width: screen.$breakpoint) {
+        
     }
 }

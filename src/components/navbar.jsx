@@ -56,7 +56,7 @@ const Navbar = () => {
                             <div data-theme='orange' className={`${styles.theme_select} ${styles.theme_options}`} onClick={changeDefaultTheme}>
                                 <button className={`${styles.sub_theme} ${styles.orange_color}`}></button>
                             </div>
-                        </div>
+                        </div> 
                     </div>
                 </div>
             </div>

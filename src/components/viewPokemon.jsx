@@ -20,6 +20,11 @@ const ViewPokemon = (props) => {
     const [coverColor, setCoverColor] = useState('loading');
     const [activeTab, setActiveTab] = useState('About')
 
+
+    const closeModal = () => {
+        $(`#viewpokemon-${props.data.id}`).modal('hide');
+    }
+
     //console.log(coverColor)
     const getDominantColor = (imageUrl, callback) => {
         const img = document.createElement("IMG");
@@ -145,7 +150,7 @@ const ViewPokemon = (props) => {
                         :
                         <div className={`modal-content ${styles.modalContent}`}>
                             <div className={styles.cover} style={{ background: coverColor }}>
-                                <button>&#8592;</button>
+                                <button onClick={closeModal}>&#8592;</button>
                                 <img src={props.data.sprites.front_default} alt="pokemon" />
                             </div>
                             <p className={styles.name}>{props.data.name}</p>
