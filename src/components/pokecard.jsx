@@ -24,7 +24,7 @@ const Pokecard = (props) => {
         return (
             <div className={`${styles.container} ${theme.default_theme} ${styles.similar}`}>
                 <div className={styles.img_container}>
-                    <img src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${props.similar.id}.png`} alt='pokename'/>
+                    <img src={`https://unpkg.com/pokeapi-sprites@2.0.2/sprites/pokemon/other/dream-world/${props.similar.id}.svg`} alt='pokename'/>
                 </div>
                 <p className={styles.pokemon_name}>{props.similar.name}</p>
             </div>
@@ -34,7 +34,7 @@ const Pokecard = (props) => {
     return (
         <div className={`${styles.container} ${theme.default_theme}`}>
             <div className={styles.img_container}>
-                <img src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${props.data.id}.png`} alt='pokename'/>
+                <img src={`https://unpkg.com/pokeapi-sprites@2.0.2/sprites/pokemon/other/dream-world/${props.data.id}.svg`} alt='pokename'/>
             </div>
             <p className={styles.pokemon_name}>{props.data.name}</p>
             <div className={styles.poke_types}>

@@ -135,9 +135,9 @@ const ViewPokemon = (props) => {
         </div>
     }
 
-
+    //props.data.sprites.front_default
     useEffect(() => {
-        getDominantColor(props.data.sprites.front_default, createGradient)
+        getDominantColor(`https://unpkg.com/pokeapi-sprites@2.0.2/sprites/pokemon/other/dream-world/${props.data.id}.svg`, createGradient)
         //getSimilarPokemon()
         // eslint-disable-next-line
     }, [])
@@ -151,7 +151,7 @@ const ViewPokemon = (props) => {
                         <div className={`modal-content ${styles.modalContent}`}>
                             <div className={styles.cover} style={{ background: coverColor }}>
                                 <button onClick={closeModal}>&#8592;</button>
-                                <img src={props.data.sprites.front_default} alt="pokemon" />
+                                <img src={`https://unpkg.com/pokeapi-sprites@2.0.2/sprites/pokemon/other/dream-world/${props.data.id}.svg`} alt="pokemon" />
                             </div>
                             <p className={styles.name}>{props.data.name}</p>
                             <div className={styles.types}>
